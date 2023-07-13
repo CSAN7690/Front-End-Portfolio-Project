@@ -21,7 +21,6 @@ function generateCharacterCards(characters) {
         <h3>${character.name}</h3>
         <p>Gender: ${character.gender}</p>
         <p>Height: ${character.height}</p>
-        <!-- Add additional details as needed -->
       `;
         charactersContainer.appendChild(card);
     });
@@ -34,7 +33,6 @@ function showCharacterDetails(character) {
       <h2>${character.name}</h2>
       <p>Gender: ${character.gender}</p>
       <p>Height: ${character.height}</p>
-      <!-- Add additional details as needed -->
     `;
 }
 
@@ -45,6 +43,39 @@ function searchCharacters(searchInput, characters) {
     );
     return filteredCharacters;
 }
+
+// Function to handle the form submission in characters.html
+function handleCharacterFormSubmit(event) {
+    event.preventDefault();
+
+    // Retrieve the search term from the input field
+    const searchInput = document.getElementById('search-input');
+    const searchTerm = searchInput.value.trim();
+
+    // Check if the search term is empty
+    if (searchTerm === '') {
+        displayErrorMessage('Please enter a search term.');
+        return;
+    }
+
+    // Perform the desired effect based on the submitted form data
+    // For example, you can filter the character cards based on the search term
+    filterCharacterCards(searchTerm);
+}
+
+// Function to display an error message in characters.html
+function displayErrorMessage(message) {
+    const errorElement = document.createElement('p');
+    errorElement.classList.add('error-message');
+    errorElement.textContent = message;
+
+    const form = document.getElementById('search-form');
+    form.appendChild(errorElement);
+}
+
+// Add event listener to the form submission in characters.html
+const characterSearchForm = document.getElementById('search-form');
+characterSearchForm.addEventListener('submit', handleCharacterFormSubmit);
 
 
 // Fetch data from the Star Wars API for characters 🐶🦴
@@ -65,7 +96,9 @@ characterCards.forEach((card) => {
 const searchForm = document.querySelector('#search-form');
 searchForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    const searchInput = /* Retrieve the search input value */
+    const searchInput =
+        /* Retrieve the search input value */
         filteredCharacters = searchCharacters(searchInput, charactersData);
     generateCharacterCards(filteredCharacters);
 });
+
